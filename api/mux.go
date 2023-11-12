@@ -3,11 +3,12 @@ package api
 import (
 	"log"
 	"net/http"
+	"taskList/service"
 
 	"github.com/gorilla/mux"
 )
 
-func NewRouter() http.Handler {
+func NewRouter(taskService *service.TaskService) http.Handler {
 	router := mux.NewRouter()
 	router.Use(commonMiddleware)
 
