@@ -3,6 +3,7 @@ package api
 import (
 	"log"
 	"net/http"
+	"taskList/handlers"
 	"taskList/service"
 
 	"github.com/gorilla/mux"
@@ -18,11 +19,15 @@ func NewRouter(taskService *service.TaskService) http.Handler {
 		}
 	}).Methods(http.MethodGet)
 
-	router.HandleFunc("/tasks", func(w http.ResponseWriter, r *http.Request) {}).Methods(http.MethodGet)
+	router.HandleFunc("/tasks", handlers.GetAllTasks(taskService)).Methods(http.MethodGet)
 
-	router.HandleFunc("/task/{id}", func(w http.ResponseWriter, r *http.Request) {}).Methods(http.MethodGet)
+	router.HandleFunc("/task/{id}", handlers.GetTask(taskService)).Methods(http.MethodGet)
 
-	router.HandleFunc("/save", func(w http.ResponseWriter, r *http.Request) {}).Methods(http.MethodPost)
+	router.HandleFunc("/save", handlers.SaveTask(taskService)).Methods(http.MethodPost)
+
+	router.HandleFunc("/delete", handlers.DeleteTask(taskService)).Methods(http.MethodDelete)
+
+	router.HandleFunc("update", handlers.UpdateTask(taskService)).Methods(http.MethodPut)
 
 	return router
 }
