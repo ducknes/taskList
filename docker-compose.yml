@@ -1,0 +1,28 @@
+version: '3.8'
+
+services:
+  db:
+    image: postgres:latest
+    container_name: "taski-postgres"
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_DB=taskList
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    networks:
+      - fullstack
+
+  web:
+    build: .
+    container_name: "taskList"
+    ports:
+      - "80:80"
+    depends_on:
+      - db
+    networks:
+      - fullstack
+
+networks:
+  fullstack:
+    driver: bridge
