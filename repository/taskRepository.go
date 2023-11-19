@@ -1,6 +1,9 @@
 package repository
 
-import "github.com/jmoiron/sqlx"
+import (
+	"github.com/jmoiron/sqlx"
+	"taskList/service/models"
+)
 
 type TaskRepository struct {
 	db *sqlx.DB
@@ -14,7 +17,9 @@ func NewTaskRepository(db *sqlx.DB) *TaskRepository {
 
 func (t *TaskRepository) GetAllTasks() {}
 
-func (t *TaskRepository) GetTask() {}
+func (t *TaskRepository) GetTask(id int) (models.Task, error) {
+	return models.Task{}, nil
+}
 
 func (t *TaskRepository) UpdateTask() {}
 
