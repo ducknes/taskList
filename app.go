@@ -15,8 +15,6 @@ type serviceProvider struct {
 }
 
 func (s serviceProvider) provideServer() *api.Server {
-	//TODO: repos and db init
-
 	postgres, err := database.NewPostgresConnection(s.settings.PostgresConnection)
 	if err != nil {
 		log.Fatal(err)

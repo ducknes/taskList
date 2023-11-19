@@ -11,3 +11,13 @@ func NewTaskService(repo *repository.TaskRepository) *TaskService {
 		repo: repo,
 	}
 }
+
+func (s *TaskService) GetAllTasks() {}
+
+func (s *TaskService) GetTask() {}
+
+func (s *TaskService) AddTask() {}
+
+func (s *TaskService) UpdateTask() {}
+
+func (s *TaskService) DeleteTask() {}
