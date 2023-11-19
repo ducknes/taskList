@@ -11,3 +11,13 @@ func NewTaskRepository(db *sqlx.DB) *TaskRepository {
 		db: db,
 	}
 }
+
+func (t *TaskRepository) GetAllTasks() {}
+
+func (t *TaskRepository) GetTask() {}
+
+func (t *TaskRepository) UpdateTask() {}
+
+func (t *TaskRepository) AddTask() {}
+
+func (t *TaskRepository) DeleteTask() {}

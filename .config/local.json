@@ -1,4 +1,4 @@
 {
   "port" : "80",
-  "postgresConnection" : "postgres://postgres:postgres@host.docker.internal/taskList?sslmode=disable"
+  "postgresConnection" : "postgres://postgres:postgres@host.docker.internal:5432/taskList?sslmode=disable"
 }
