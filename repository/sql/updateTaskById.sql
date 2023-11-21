@@ -4,4 +4,6 @@ set
     t.status = $2,
     t.message = $3
 where
-    t.id = $1;
+    t.id = $1
+returning
+    t.id;

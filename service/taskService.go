@@ -15,7 +15,9 @@ func NewTaskService(repo *repository.TaskRepository) *TaskService {
 	}
 }
 
-func (s *TaskService) GetAllTasks() {}
+func (s *TaskService) GetAllTasks() ([]models.Task, error) {
+	return s.repo.GetAllTasks()
+}
 
 func (s *TaskService) GetTask(id string) (models.Task, error) {
 	taskId, err := validateId(id)
@@ -26,8 +28,24 @@ func (s *TaskService) GetTask(id string) (models.Task, error) {
 	return s.repo.GetTask(taskId)
 }
 
-func (s *TaskService) AddTask() {}
+func (s *TaskService) AddTask(task models.Task) (int, error) {
+	return s.repo.AddTask(task)
+}
 
-func (s *TaskService) UpdateTask() {}
+func (s *TaskService) UpdateTask(id string) (int, error) {
+	taskId, err := validateId(id)
+	if err != nil {
+		return 0, err
+	}
 
-func (s *TaskService) DeleteTask() {}
+	return s.repo.UpdateTask(taskId)
+}
+
+func (s *TaskService) DeleteTask(id string) (int, error) {
+	taskId, err := validateId(id)
+	if err != nil {
+		return 0, err
+	}
+
+	return s.repo.DeleteTask(taskId)
+}

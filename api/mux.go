@@ -25,9 +25,9 @@ func NewRouter(taskService *service.TaskService) http.Handler {
 
 	router.HandleFunc("/save", handlers.SaveTask(taskService)).Methods(http.MethodPost)
 
-	router.HandleFunc("/delete", handlers.DeleteTask(taskService)).Methods(http.MethodDelete)
+	router.HandleFunc("/delete/{id}", handlers.DeleteTask(taskService)).Methods(http.MethodDelete)
 
-	router.HandleFunc("/update", handlers.UpdateTask(taskService)).Methods(http.MethodPut)
+	router.HandleFunc("/update/{id}", handlers.UpdateTask(taskService)).Methods(http.MethodPut)
 
 	return router
 }
