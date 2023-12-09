@@ -2,8 +2,9 @@ package config
 
 import (
 	"fmt"
-	"github.com/spf13/viper"
 	"os"
+
+	"github.com/spf13/viper"
 )
 
 type Settings struct {
@@ -15,7 +16,7 @@ func Init() {
 	viper.AddConfigPath(".config/")
 	viper.SetConfigType("json")
 	viper.SetConfigName(configFile())
-	err := viper.WriteConfig()
+	err := viper.ReadInConfig()
 	viper.WatchConfig()
 	if err != nil {
 		panic(fmt.Sprintf("Couldn't write config. error: %v", err))
