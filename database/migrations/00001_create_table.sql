@@ -1,8 +1,9 @@
+-- +goose Up
 create table public."tasks"
 (
-    id      integer not null,
+    id      serial not null,
     status  integer not null,
-    message integer
+    message text
 );
 
 create unique index "tasks_id_uindex"
@@ -15,4 +16,5 @@ alter table public."tasks"
     add constraint "tasks_pk"
         primary key (id);
 
+-- +goose Down
 DROP TABLE IF EXISTS public."tasks" CASCADE;

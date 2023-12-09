@@ -6,6 +6,7 @@ import (
 
 	"github.com/jmoiron/sqlx"
 	_ "github.com/lib/pq"
+	"github.com/pressly/goose"
 )
 
 func NewPostgresConnection(connectionString string) (*sqlx.DB, error) {
@@ -15,7 +16,7 @@ func NewPostgresConnection(connectionString string) (*sqlx.DB, error) {
 	}
 
 	for i := 0; i < 5; i++ {
-		time.Sleep(30 * time.Microsecond)
+		time.Sleep(30 * time.Millisecond)
 		if err = db.Ping(); err != nil {
 			continue
 		}
@@ -24,6 +25,10 @@ func NewPostgresConnection(connectionString string) (*sqlx.DB, error) {
 
 	if err = db.Ping(); err != nil {
 		return nil, fmt.Errorf("postgtes: don`t ping connection. err: %v", err)
+	}
+
+	if err = goose.Up(db.DB, "database/migrations"); err != nil {
+		return nil, fmt.Errorf("goose: can't run migrations. err: %v", err)
 	}
 
 	return db, nil

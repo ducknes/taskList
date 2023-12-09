@@ -3,8 +3,9 @@ package repository
 import (
 	_ "embed"
 	"fmt"
-	"github.com/jmoiron/sqlx"
 	"taskList/service/models"
+
+	"github.com/jmoiron/sqlx"
 )
 
 type TaskRepository struct {
