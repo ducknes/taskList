@@ -59,9 +59,9 @@ func (t *TaskRepository) GetTask(id int) (models.Task, error) {
 //go:embed sql/updateTaskById.sql
 var updateTask string
 
-func (t *TaskRepository) UpdateTask(id int) (int, error) {
+func (t *TaskRepository) UpdateTask(task models.Task) (int, error) {
 	var updatedTaskId int
-	err := t.db.QueryRowx(updateTask, id).Scan(&updatedTaskId)
+	err := t.db.QueryRowx(updateTask, task.Id, task.Status, task.Message).Scan(&updatedTaskId)
 	if err != nil {
 		return 0, fmt.Errorf("err while updating task. err: %v", err)
 	}

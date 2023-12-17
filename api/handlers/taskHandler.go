@@ -49,11 +49,11 @@ func DeleteTask(taskService *service.TaskService) http.HandlerFunc {
 
 func UpdateTask(taskService *service.TaskService) http.HandlerFunc {
 	return apiHandler(func(r *http.Request) (interface{}, error) {
-		id, err := parseVarsId(r)
-		if err != nil {
+		var updatedTask models.Task
+		if err := json.NewDecoder(r.Body).Decode(&updatedTask); err != nil {
 			return nil, err
 		}
 
-		return taskService.UpdateTask(id)
+		return taskService.UpdateTask(updatedTask)
 	})
 }

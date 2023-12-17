@@ -32,13 +32,8 @@ func (s *TaskService) AddTask(task models.Task) (int, error) {
 	return s.repo.AddTask(task)
 }
 
-func (s *TaskService) UpdateTask(id string) (int, error) {
-	taskId, err := validateId(id)
-	if err != nil {
-		return 0, err
-	}
-
-	return s.repo.UpdateTask(taskId)
+func (s *TaskService) UpdateTask(task models.Task) (int, error) {
+	return s.repo.UpdateTask(task)
 }
 
 func (s *TaskService) DeleteTask(id string) (int, error) {
